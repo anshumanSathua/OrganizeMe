@@ -1,5 +1,3 @@
-// indexedDB.js
-
 const DB_NAME = "TodoDB";
 const TODO_STORE = "todos";
 
