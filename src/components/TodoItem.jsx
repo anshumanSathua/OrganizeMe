@@ -40,7 +40,7 @@ const TodoItem = () => {
     try {
       await deleteTodo(currentTodo.id);
       // Redirect to the home page after successful deletion
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.error("Error deleting todo:", error);
     }
