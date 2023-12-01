@@ -31,6 +31,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/add" element={<Addtodo />} />
           <Route path="/add/:id" element={<Addtodo />} />
           <Route path="/todo/:id" element={<TodoItem />} />
         </Routes>

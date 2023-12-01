@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Layout from "./Layout";
+import { useNavigate } from "react-router-dom";
 import { addTodo } from "../services/indexedDB";
 
 const AddTodo = () => {
@@ -9,6 +10,7 @@ const AddTodo = () => {
   const [label, setLabel] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -51,6 +53,7 @@ const AddTodo = () => {
     try {
       const addedTodo = await addTodo(newTodo);
       console.log("Todo added:", addedTodo);
+      navigate("/");
     } catch (error) {
       console.error("Error adding todo:", error);
     }
