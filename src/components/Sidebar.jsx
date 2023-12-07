@@ -30,9 +30,6 @@ const Sidebar = () => {
           >
             Task+
           </button>
-          <button className="w-[10rem] h-[3rem] text-2xl font-mono text-gray-600 border border-gray-700 rounded-lg px-5">
-            Category+
-          </button>
         </section>
       </section>
     </>

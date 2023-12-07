@@ -20,16 +20,18 @@ const Navbar = () => {
     navigate("/add");
   };
 
-  const handleMenuItemClick = () => {
-    // Close the menu when a menu item is clicked
-    setIsMenuOpen(false);
+  const clickHandler = () => {
+    navigate("/");
   };
 
   return (
     <nav className="w-full h-[8rem] md:h-[4rem] flex flex-col md:flex-row justify-center items-center relative">
-      {/*Heading and Burger Menu*/}
+      {/* Part 1: Heading and Burger Menu (Visible on mobile screens only) */}
       <div className="md:hidden flex items-center w-full p-2">
-        <h1 className="text-xl font-bold text-gray-600 mb-2 pl-2">
+        <h1
+          className="text-xl font-bold text-gray-600 mb-2 pl-2"
+          onClick={clickHandler}
+        >
           OrganizeMe
         </h1>
         {/* Burger menu icon */}
@@ -63,8 +65,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/*Search Bar and Button*/}
+      {/* Part 2: Search Bar and Button (Visible on all screens) */}
       <div className="flex flex-row justify-center items-center w-full">
+        {/* Search bar */}
         <input
           type="text"
           id="search"
@@ -72,14 +75,16 @@ const Navbar = () => {
           className="w-[15rem] md:w-[20rem] h-[2.5rem] md:h-[2.5rem] border border-gray-400 shadow-md rounded-md bg-transparent px-2"
         />
 
+        {/* Search button */}
         <button className="border border-gray-400 shadow-md px-2 h-[2.5rem] rounded-md ml-1 md:ml-2">
           Search
         </button>
       </div>
 
-      {/*Mobile Menu Popup*/}
+      {/* Mobile Menu Popup */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-36 h-36 bg-white border border-gray-300 shadow-md py-2 px-4 z-10 rounded-md">
+          {/* Menu Items */}
           <button
             className="block w-full text-center text-lg text-slate-600 mb-3"
             onClick={handleHomeClick}
@@ -91,12 +96,6 @@ const Navbar = () => {
             onClick={handleAddTaskClick}
           >
             Task+
-          </button>
-          <button
-            className="block w-full text-center text-lg text-slate-600 mb-3"
-            onClick={handleMenuItemClick}
-          >
-            Categories
           </button>
         </div>
       )}

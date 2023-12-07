@@ -125,19 +125,25 @@ const AddTodo = () => {
             <div className="text-red-500 font-bold mb-2">{errors.label}</div>
           )}
 
+          {errors.label && (
+            <div className="text-red-500 font-bold mb-2">{errors.label}</div>
+          )}
+
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Label
             </label>
-            <input
+            <select
               className={`${
                 errors.label ? "border-red-500" : ""
               } shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              type="text"
-              placeholder="Enter Label"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-            />
+            >
+              <option value="low">Low</option>
+              <option value="mid">Mid</option>
+              <option value="high">High</option>
+            </select>
           </div>
 
           <div className="mb-4">

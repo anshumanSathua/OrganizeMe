@@ -31,6 +31,12 @@ const Home = () => {
         return todo.isChecked;
       case "Incomplete":
         return !todo.isChecked;
+      case "Low":
+        return todo.label === "low";
+      case "Mid":
+        return todo.label === "mid";
+      case "High":
+        return todo.label === "high";
       default:
         return true;
     }
@@ -59,6 +65,9 @@ const Home = () => {
               <option value="All">All</option>
               <option value="Complete">Complete</option>
               <option value="Incomplete">Incomplete</option>
+              <option value="Low">Low</option>
+              <option value="Mid">Mid</option>
+              <option value="High">High</option>
             </select>
           </div>
         </div>
