@@ -9,7 +9,6 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch todos from IndexedDB when the component mounts
     const fetchTodos = async () => {
       try {
         const allTodos = await getTodos();
@@ -20,7 +19,7 @@ const Home = () => {
     };
 
     fetchTodos();
-  }, []); // Empty dependency array to ensure this effect runs only once
+  }, []);
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
@@ -38,23 +37,22 @@ const Home = () => {
   });
 
   const handleAddTodoClick = () => {
-    // Navigate to the "Add Todo" page
     navigate("/add");
   };
 
   return (
     <Layout>
-      <section className="w-[800px] h-[500px] bg-slate-100 m-auto mt-4 rounded-md shadow-md">
-        <div className="flex justify-between mx-5 pt-5">
+      <section className="max-w-md md:w-[800px] h-[500px] bg-slate-100 mx-auto mt-4 rounded-md shadow-md">
+        <div className="flex flex-row justify-between items-center md:mx-5 pt-5">
           <button
             onClick={handleAddTodoClick}
-            className="border border-gray-400 rounded-md shadow-md w-[10rem]"
+            className="border border-gray-400 rounded-md shadow-md w-[8rem] h-[2.5rem] md:w-[10rem] ml-2 md:ml-0 "
           >
             Add+
           </button>
-          <div className="relative inline-block bg-slate-100 ">
+          <div className="relative inline-block bg-slate-100 w-[8rem] md:w-[10rem] md:ml-3 mr-2 md:mr-0 ">
             <select
-              className="border border-gray-400 rounded-md shadow-md w-[10rem] h-[2.5rem] pl-[2rem] bg-slate-100"
+              className="border border-gray-400 rounded-md shadow-md w-full h-[2.5rem] md:w-[10rem] pl-[2rem] bg-slate-100"
               value={filter}
               onChange={(e) => handleFilterChange(e.target.value)}
             >
@@ -64,17 +62,17 @@ const Home = () => {
             </select>
           </div>
         </div>
-        <div className="w-[700px] m-auto mt-5 rounded-md shadow-md">
+        <div className="max-w-md mx-auto mt-5 rounded-md shadow-md overflow-hidden">
           {filteredTodos.length === 0 ? (
-            <p className="text-gray-700 text-center text-white bg-slate-700 border border-gray-700 rounded-md p-[0.5rem]  ">
+            <p className="text-gray-700 text-center text-white bg-slate-700 border border-gray-700 rounded-md p-[0.5rem]">
               No todos yet.
             </p>
           ) : (
-            <ul>
+            <ul className="divide-y divide-gray-400 m-1">
               {filteredTodos.map((todo) => (
                 <li
                   key={todo.id}
-                  className="text-gray-700 p-[0.5rem] font-semibold border"
+                  className="text-gray-700 p-[0.5rem] font-semibold hover:bg-gray-100"
                 >
                   <Link to={`/todo/${todo.id}`} state={{ todo }}>
                     {todo.title}

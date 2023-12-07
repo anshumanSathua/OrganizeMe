@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <section className="flex flex-col items-center w-[13rem] h-[40rem] border border-slate-300 rounded-md ml-5 mt-[4rem] bg-slate-100 shadow-md ">
+      <section className="hidden md:flex flex-col items-center w-[13rem] h-[40rem] border border-slate-300 rounded-md ml-5 mt-[4rem] bg-slate-100 shadow-md">
         <h1 className="text-3xl font-bold font-mono text-gray-600 mt-5 p-[0.5rem]">
           OrganizeMe
         </h1>
