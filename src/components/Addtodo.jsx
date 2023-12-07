@@ -35,17 +35,15 @@ const AddTodo = () => {
     // Reset previous errors
     setErrors(validationErrors);
 
-    // Check if there are any errors
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
+    // Set default label to "low" if not provided by the user
+    const newLabel = label.trim() === "" ? "low" : label;
 
-    // Continue with adding the todo if no validation errors
+    // Continue with adding the todo
     const newTodo = {
       title,
       description,
       dueDate,
-      label,
+      label: newLabel,
       isChecked,
     };
 
