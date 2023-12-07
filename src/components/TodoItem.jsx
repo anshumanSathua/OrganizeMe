@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Layout from "./Layout";
-import { getTodoById, updateTodo, deleteTodo } from "../services/indexedDB";
+import { getTodoById, deleteTodo } from "../services/indexedDB";
 
 const TodoItem = () => {
   const { id } = useParams();
@@ -31,15 +29,12 @@ const TodoItem = () => {
   };
 
   const handleEdit = () => {
-    // Redirect to the edit page with the todo item details
-    navigate(`/add/${currentTodo.id}`, { state: { currentTodo } });
+    navigate(`/update/${currentTodo.id}`);
   };
 
   const handleDelete = async () => {
-    // Implement your delete logic here
     try {
       await deleteTodo(currentTodo.id);
-      // Redirect to the home page after successful deletion
       navigate("/");
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -51,6 +46,7 @@ const TodoItem = () => {
       try {
         const todoDetails = await getTodoById(Number(id));
         setCurrentTodo(todoDetails);
+        setComments(todoDetails.comments || []);
       } catch (error) {
         console.error("Error fetching todo details:", error);
       }
@@ -66,6 +62,7 @@ const TodoItem = () => {
   return (
     <Layout>
       <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded-md shadow-md">
+        {/* ... (todo details rendering) */}
         <h2 className="text-xl font-bold mb-2">{currentTodo.title}</h2>
         <p className="text-gray-700 mb-2">{currentTodo.description}</p>
         <p className="text-gray-700 mb-2">
@@ -75,7 +72,6 @@ const TodoItem = () => {
         <p className="text-gray-700 mb-2">
           Completed: {currentTodo.isChecked ? "Yes" : "No"}
         </p>
-
         {/* Comment section */}
         <div className="mt-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">

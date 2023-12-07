@@ -82,27 +82,37 @@ export const getTodoById = (id) => {
 };
 
 // Function to update a todo
-export const updateTodo = (todo) => {
-  return new Promise((resolve, reject) => {
-    try {
-      openDB().then((db) => {
-        const transaction = db.transaction(TODO_STORE, "readwrite");
-        const todosStore = transaction.objectStore(TODO_STORE);
+export const updateTodo = async (todoId, updatedFields) => {
+  try {
+    const db = await openDB();
 
-        const request = todosStore.put(todo);
+    // Open a transaction on the "todos" object store with readwrite access
+    const transaction = db.transaction(["todos"], "readwrite");
 
-        request.onsuccess = () => {
-          resolve();
-        };
+    // Access the "todos" object store
+    const objectStore = transaction.objectStore("todos");
 
-        request.onerror = () => {
-          reject(new Error("Error updating todo"));
-        };
-      });
-    } catch (error) {
-      reject(error);
+    // Retrieve the existing todo using its ID
+    const existingTodo = await objectStore.get(todoId);
+
+    if (existingTodo) {
+      // Update the fields of the existing todo with the provided values
+      const updatedTodo = { ...existingTodo, ...updatedFields };
+
+      // Put the updated todo back into the object store
+      await objectStore.put(updatedTodo);
+
+      console.log("Todo updated successfully:", updatedTodo);
+    } else {
+      console.error("Todo not found");
     }
-  });
+
+    // Complete the transaction
+    await transaction.complete;
+  } catch (error) {
+    console.error("Error updating todo:", error);
+    throw error;
+  }
 };
 
 // Function to delete a todo
