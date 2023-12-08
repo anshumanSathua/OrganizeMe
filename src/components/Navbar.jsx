@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,6 +23,10 @@ const Navbar = () => {
 
   const clickHandler = () => {
     navigate("/");
+  };
+
+  const handleSearchClick = () => {
+    navigate(`/search?q=${searchQuery}`);
   };
 
   return (
@@ -73,18 +78,21 @@ const Navbar = () => {
           id="search"
           placeholder="Search for tasks..."
           className="w-[15rem] md:w-[20rem] h-[2.5rem] md:h-[2.5rem] border border-gray-400 shadow-md rounded-md bg-transparent px-2"
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
 
         {/* Search button */}
-        <button className="border border-gray-400 shadow-md px-2 h-[2.5rem] rounded-md ml-1 md:ml-2">
+        <button
+          className="border border-gray-400 shadow-md px-2 h-[2.5rem] rounded-md ml-1 md:ml-2"
+          onClick={handleSearchClick}
+        >
           Search
         </button>
       </div>
 
       {/* Mobile Menu Popup */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-36 h-36 bg-white border border-gray-300 shadow-md py-2 px-4 z-10 rounded-md">
-          {/* Menu Items */}
+        <div className="md:hidden absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-36 h-36 bg-slate-100 border border-gray-300 shadow-md py-2 px-4 z-10 rounded-md">
           <button
             className="block w-full text-center text-lg text-slate-600 mb-3"
             onClick={handleHomeClick}
