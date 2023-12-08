@@ -73,7 +73,7 @@ const Home = () => {
         </div>
         <div className="max-w-md mx-auto mt-5 rounded-md shadow-md overflow-hidden">
           {filteredTodos.length === 0 ? (
-            <p className="text-gray-700 text-center text-white bg-slate-700 border border-gray-700 rounded-md p-[0.5rem]">
+            <p className="text-center text-white bg-slate-700 border border-gray-700 rounded-md p-[0.5rem]">
               No todos yet.
             </p>
           ) : (

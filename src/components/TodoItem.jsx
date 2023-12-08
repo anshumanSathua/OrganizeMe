@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import Layout from "./Layout";
 import { getTodoById, deleteTodo } from "../services/indexedDB";
 
@@ -151,17 +150,6 @@ const TodoItem = () => {
       </div>
     </Layout>
   );
-};
-
-TodoItem.propTypes = {
-  todo: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    dueDate: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    isChecked: PropTypes.bool.isRequired,
-  }).isRequired,
 };
 
 export default TodoItem;

@@ -87,10 +87,10 @@ export const updateTodo = async (todoId, updatedFields) => {
     const db = await openDB();
 
     // Open a transaction on the "todos" object store with readwrite access
-    const transaction = db.transaction(["todos"], "readwrite");
+    const transaction = db.transaction([TODO_STORE], "readwrite");
 
     // Access the "todos" object store
-    const objectStore = transaction.objectStore("todos");
+    const objectStore = transaction.objectStore(TODO_STORE);
 
     // Retrieve the existing todo using its ID
     const existingTodo = await objectStore.get(todoId);
